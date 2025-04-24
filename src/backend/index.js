@@ -6,12 +6,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Connexion à la base de données MySQL
+// Use environment variables
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "mot_de_passe",
-  database: "maBase",
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "mot_de_passe",
+  database: process.env.DB_NAME || "maBase",
 });
 
 db.connect((err) => {
