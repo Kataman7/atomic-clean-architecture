@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Build output (ignore contents, but allow empty folder)
+build/*
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -26,5 +29,6 @@ dist-ssr
 # React Component Preview
 previewConfig.json
 
+# Old paths
 src/backend/node_modules
 src/frontend/node_modules

@@ -23,39 +23,32 @@ Une démo d'architecture frontend propre utilisant React, Three.js et une struct
 ## Structure du Projet
 
 ```
-src/
-├── components/          # Composants UI (Atomic Design)
-│   ├── atoms/           # AtmButton, AtmCube, etc.
-│   ├── molecules/       # MolCounter, etc.
-│   ├── organisms/       # ThreeOrgScene, etc.
-├── lib/
-│   ├── store/           # État global Redux
-│   │   ├── slices/      # counterSlice.js
-│   │   ├── store.js
-├── pages/               # Pages principales (PagHome, PagCubes, etc.)
-├── routes/              # Configuration des routes React Router
-├── services/            # Communication API
-│   ├── products/
-│   │   ├── api.js       # Fonction API générique
-│   │   ├── queries.js   # Fonctions GET
-│   │   ├── mutations.js # Fonctions POST/PUT/DELETE
-├── styles/              # Styles globaux
-│   ├── globals.css
-├── index.jsx            # Point d'entrée React
-├── .env                 # Variables d'environnement (API URL)
-├── Dockerfile           # Build production
-├── Dockerfile.dev       # Dev mode
+```
+code/
+├── index.html
 ├── package.json
+├── src/               # Code source React
+│   ├── index.jsx
+│   ├── components/
+│   │   ├── atoms/
+│   │   ├── molecules/
+│   │   ├── organisms/
+│   ├── pages/
+│   ├── routes/
+│   ├── services/
+│   ├── lib/
+│   └── styles/
+├── public/
+├── .env
+├── Dockerfile
+├── Dockerfile.dev
 ├── vite.config.js
 ├── tailwind.config.js
 ├── eslint.config.js
 ```
+```
 
 ## Installation
-
-### Prérequis
-- Docker et Docker Compose
-- Node.js (optionnel, pour développement local sans Docker)
 
 ### Avec Docker (recommandé)
 1. Clone le repo :
@@ -70,17 +63,6 @@ src/
    ```
    - Mode dev : `http://localhost:5173`
    - Mode build : `http://localhost:80`
-
-### Sans Docker (développement local)
-1. Installe les dépendances :
-   ```bash
-   npm install
-   ```
-
-2. Lance le serveur dev :
-   ```bash
-   npm run dev
-   ```
 
 ## Utilisation
 
@@ -98,38 +80,48 @@ VITE_API_URL=http://votre-api.com
 ```
 
 ### Utilisation des Services API
-Importe les fonctions dans tes composants :
+## Exemples dans le Code
 
-```jsx
-import { getItems, addItem } from '../services/products/queries.js';
+Le projet contient plusieurs exemples pratiques de React, Three.js, Redux et API. Voici un aperçu :
 
-const MyComponent = () => {
-  const [items, setItems] = useState([]);
+### Gestion d'État avec Redux et useState
+- **Store Redux** (`src/lib/store/store.js`) : Configuration centralisée avec `configureStore`.
+- **Slice Redux** (`src/lib/store/slices/counterSlice.js`) : Définition d'un état compteur avec `createSlice`, actions `increment`, `decrement`, `setValue`.
+- **Utilisation dans un composant** (`src/pages/PagCounters.jsx`) :
+  - `useSelector` pour lire l'état global.
+  - `useDispatch` pour dispatcher des actions.
+  - `useState` pour un état local alternatif.
+  - `useEffect` pour synchroniser avec les params d'URL (`useParams`).
+  - `useState` et `useEffect` pour gérer un compteur local.
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getItems();
-        setItems(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
+### Composants Atomiques (Atomic Design)
+- **Atom Button** (`src/components/atoms/AtmButton.jsx`) : Bouton simple avec props `label`, `onClick`, styles Tailwind.
+- **Molécule Counter** (`src/components/molecules/MolCounter.jsx`) : Combine des atoms, utilise `useDispatch` pour Redux.
 
-  const handleAdd = async () => {
-    await addItem({ name: 'Nouvel item' });
-    // Recharge les données...
-  };
+### Three.js et Animations 3D
+- **Scène 3D** (`src/components/organisms/ThreeOrgScene.jsx`) : Utilise `<Canvas>` de React Three Fiber, lumières (`ambientLight`, `directionalLight`), contrôles (`OrbitControls`).
+- **Cube Interactif** (`src/components/atoms/ThreeAtmCube.jsx`) :
+  - `useRef` pour référencer le mesh.
+  - `useState` pour états `hovered` et `active`.
+  - `useFrame` pour animation de rotation continue.
+  - Événements : `onClick`, `onPointerOver/Out` pour interactions.
+  - Props : position, couleur, taille, wireframe.
+- **Page Cubes** (`src/pages/PagCubes.jsx`) : Montre plusieurs cubes dans une scène, avec instructions utilisateur.
 
-  return (
-    <div>
-      {/* Ton JSX */}
-    </div>
-  );
-};
-```
+### Routage avec React Router
+- **Routes** (`src/routes/routes.jsx`) : Définition des routes avec `<Routes>` et `<Route>`, params dynamiques (`:value?`), route 404.
+
+### Communication API
+- **API Générique** (`src/services/products/api.js`) : Fonction `API()` utilisant `fetch`, configurable via `.env`, gestion d'erreurs, sérialisation JSON automatique.
+- **Queries/Mutations** (`src/services/products/queries.js`, `mutations.js`) : Fonctions pour GET/POST/PUT/DELETE, prêtes à l'emploi.
+
+### Hooks React
+- `useState` : Gestion d'états locaux (compteurs, hover).
+- `useEffect` : Effets secondaires (sync URL, fetch potentiel).
+- `useRef` : Références DOM/Three.js.
+- `useFrame` : Animations Three.js.
+
+Ces exemples montrent comment combiner React moderne, 3D, état global et API dans une architecture propre.
 
 ## Architecture
 
