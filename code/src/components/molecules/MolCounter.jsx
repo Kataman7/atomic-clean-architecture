@@ -1,14 +1,33 @@
 import { useDispatch } from "react-redux"
 import AtmButton from "../atoms/AtmButton"
+import styled from 'styled-components';
+
+const CounterContainer = styled.div`
+  background-color: ${props => props.theme.colors.background};
+  padding: ${props => props.theme.spacing.medium};
+  border-radius: ${props => props.theme.borderRadius.medium};
+  margin-bottom: ${props => props.theme.spacing.medium};
+`;
+
+const CounterTitle = styled.h1`
+  font-size: ${props => props.theme.fontSize.subtitle};
+  font-weight: bold;
+  margin-bottom: ${props => props.theme.spacing.small};
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: ${props => props.theme.spacing.small};
+`;
 
 const MolCounter = ({ name, handler, value, resetValue = 0 }) => {
     const dispatch = useDispatch()
 
     return (
-    <div className="bg-gray-100 p-4 rounded-lg mb-4">
-      <h1 className="text-xl font-bold mb-2">{name}: {value}</h1>
+    <CounterContainer>
+      <CounterTitle>{name}: {value}</CounterTitle>
 
-      <div className="flex gap-2">
+      <ButtonContainer>
         <AtmButton
           label="Incrémenter"
           onClick={() => dispatch(handler.increment())}
@@ -21,8 +40,8 @@ const MolCounter = ({ name, handler, value, resetValue = 0 }) => {
           label="Réinitialiser"
           onClick={() => dispatch(handler.setValue(resetValue))}
         />
-      </div>
-    </div>
+      </ButtonContainer>
+    </CounterContainer>
   )
 }
 

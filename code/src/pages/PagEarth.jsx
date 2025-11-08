@@ -1,17 +1,33 @@
 import ThreeAtmModel from '../components/atoms/ThreeAtmModel'
 import ThreeOrgScene from '../components/organisms/ThreeOrgScene'
+import styled from 'styled-components';
+
+const PageContainer = styled.div`
+  padding: ${props => props.theme.spacing.medium};
+`;
+
+const PageTitle = styled.h1`
+  font-size: ${props => props.theme.fontSize.title};
+  font-weight: bold;
+  margin-bottom: ${props => props.theme.spacing.medium};
+`;
+
+const Description = styled.p`
+  margin-top: ${props => props.theme.spacing.medium};
+  color: ${props => props.theme.colors.text};
+`;
 
 const PagEarth = () => {
     return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Character 3D</h1>
-            <ThreeOrgScene backgroundColor="#87CEEB">
+        <PageContainer>
+            <PageTitle>Character 3D</PageTitle>
+            <ThreeOrgScene backgroundColor={props => props.theme.colors.skyBlue}>
                 <ThreeAtmModel position={[0, 0, 0]}/>
             </ThreeOrgScene>
-            <p className="mt-4 text-gray-600">
+            <Description>
                 Voici bob.
-            </p>
-        </div>
+            </Description>
+        </PageContainer>
     )
 }
 

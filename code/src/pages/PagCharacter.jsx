@@ -1,17 +1,33 @@
 import ThreeAtmCharacter from '../components/atoms/ThreeAtmCharacter'
 import ThreeOrgScene from '../components/organisms/ThreeOrgScene'
+import styled from 'styled-components';
+
+const PageContainer = styled.div`
+  padding: ${props => props.theme.spacing.medium};
+`;
+
+const PageTitle = styled.h1`
+  font-size: ${props => props.theme.fontSize.title};
+  font-weight: bold;
+  margin-bottom: ${props => props.theme.spacing.medium};
+`;
+
+const Description = styled.p`
+  margin-top: ${props => props.theme.spacing.medium};
+  color: ${props => props.theme.colors.text};
+`;
 
 const PagCharacter = () => {
     return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Character 3D</h1>
+        <PageContainer>
+            <PageTitle>Character 3D</PageTitle>
             <ThreeOrgScene>
                 <ThreeAtmCharacter/>
             </ThreeOrgScene>
-            <p className="mt-4 text-gray-600">
+            <Description>
                 Voici bob.
-            </p>
-        </div>
+            </Description>
+        </PageContainer>
     )
 }
 
