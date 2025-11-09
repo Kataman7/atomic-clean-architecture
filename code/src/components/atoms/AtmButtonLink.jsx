@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
+const StyledLink = styled.a`
   padding: ${props => props.theme.spacing.small};
   background-color: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.primary};
@@ -30,19 +30,12 @@ const StyledButton = styled.button`
   }
 `;
 
-const AtmButton = ({ children, onClick, href, ...props }) => {
-  if (href) {
-    return (
-      <StyledButton as="a" href={href} onClick={onClick} {...props}>
-        {children}
-      </StyledButton>
-    );
-  }
+const AtmButtonLink = ({ children, ...props }) => {
   return (
-    <StyledButton onClick={onClick} {...props}>
+    <StyledLink {...props}>
       {children}
-    </StyledButton>
+    </StyledLink>
   );
 };
 
-export default AtmButton;
+export default AtmButtonLink;

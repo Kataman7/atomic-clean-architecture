@@ -1,38 +1,49 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import styled from 'styled-components'
 import { themes } from '../styles/theme'
-import AppRoutes from '../routes/routes'
-import AtmButton from '../components/atoms/AtmButton'
+import { GlobalStyles } from '../styles/globalStyles'
+import PagHome from './PagHome'
+import MolThemeToggle from '../components/molecules/MolThemeToggle'
+import { LanguageProvider } from '../i18n/LanguageContext'
+import OrgHeader from '../components/organisms/OrgHeader'
 
 const AppContainer = styled.div`
   background-color: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.text};
+  color: ${props => props.theme.colors.primary};
   min-height: 100vh;
-`;
-
-const AppTitle = styled.h1`
-  color: ${props => props.theme.colors.text};
+  padding: 0 5vw 20px 5vw;
+  
+  @media (min-width: 800px) {
+    padding: 0 10vw 20px 10vw;
+  }
+  
+  @media (min-width: 1400px) {
+    padding: 0 28vw 20px 28vw;
+  }
+  
+  font-family: ${props => props.theme.fontFamily};
+  overflow-x: hidden;
 `;
 
 const App = () => {
-  const [currentTheme, setCurrentTheme] = useState('light')
+  const [currentTheme, setCurrentTheme] = useState('portfolio');
 
-  const toggleTheme = () => {
-    setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light')
-  }
+  const handleThemeChange = (themeName) => {
+    setCurrentTheme(themeName);
+  };
 
   return (
-    <ThemeProvider theme={themes[currentTheme]}>
-      <Router>
+    <LanguageProvider>
+      <ThemeProvider theme={themes[currentTheme]}>
+        <GlobalStyles />
         <AppContainer>
-          <AppTitle>Mon Application</AppTitle>
-          <AtmButton label={`Thème ${currentTheme === 'light' ? 'Sombre' : 'Clair'}`} onClick={toggleTheme} />
-          <AppRoutes />
+          <MolThemeToggle onThemeChange={handleThemeChange} />
+          <OrgHeader titleKey="name" />
+          <PagHome />
         </AppContainer>
-      </Router>
-    </ThemeProvider>
+      </ThemeProvider>
+    </LanguageProvider>
   )
 }
 

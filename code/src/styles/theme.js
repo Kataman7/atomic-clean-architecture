@@ -1,62 +1,76 @@
-export const lightTheme = {
+export const portfolioTheme = {
   colors: {
-    primary: '#3b82f6',
-    primaryHover: '#1d4ed8',
-    disabled: '#9ca3af',
-    background: '#f3f4f6',
-    text: '#6b7280',
-    white: '#ffffff',
-    skyBlue: '#87CEEB',
-    black: '#000000',
+    primary: '#ffffff',
+    secondary: '#e1e1e1',
+    accent: '#141414',
+    background: '#000000',
+    hovered: '#ffffff',
   },
   spacing: {
-    small: '8px',
-    medium: '16px',
-    large: '24px',
+    small: '10px',
+    medium: '15px',
+    large: '20px',
+    xl: '25px',
+    xxl: '50px',
+    section: '30px', // Espacement entre sections
   },
   fontSize: {
-    title: '24px',
-    subtitle: '20px',
+    small: '12px', // 9px pour h5, small pour p
+    medium: '16px', // medium pour navBar li
+    large: '18px', // large pour h4
+    xl: '24px', // pour h2, h3
+    xxl: '32px', // pour h1
+  },
+  border: {
+    normal: '2px',
   },
   borderRadius: {
-    small: '6px',
-    medium: '8px',
+    normal: '0px',
   },
-  maxHeight: {
-    scene: '80vh',
+  boxShadow: {
+    button: '2px 2px #000000, 4px 4px #ffffff',
+    buttonHover: '0px 0px',
   },
+  fontFamily: "'Chillax', 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', 'serif'",
 };
 
-export const darkTheme = {
+export const lightTheme = {
   colors: {
-    primary: '#60a5fa',
-    primaryHover: '#3b82f6',
-    disabled: '#6b7280',
-    background: '#1f2937',
-    text: '#d1d5db',
-    white: '#ffffff',
-    skyBlue: '#1e40af',
-    black: '#000000',
+    primary: '#000000',
+    secondary: '#333333',
+    accent: '#666666',
+    background: '#ffffff',
+    hovered: '#000000',
   },
   spacing: {
-    small: '8px',
-    medium: '16px',
-    large: '24px',
+    small: '10px',
+    medium: '15px',
+    large: '20px',
+    xl: '25px',
+    xxl: '50px',
+    section: '30px', // Espacement entre sections
   },
   fontSize: {
-    title: '24px',
-    subtitle: '20px',
+    small: '12px',
+    medium: '16px',
+    large: '18px',
+    xl: '24px',
+    xxl: '32px',
+  },
+  border: {
+    normal: '2px',
   },
   borderRadius: {
-    small: '6px',
-    medium: '8px',
+    normal: '0px',
   },
-  maxHeight: {
-    scene: '80vh',
+  boxShadow: {
+    button: '2px 2px #ffffff, 4px 4px #000000',
+    buttonHover: '0px 0px',
   },
+  fontFamily: "'Chillax', 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', 'serif'",
 };
 
 export const themes = {
+  portfolio: portfolioTheme,
   light: lightTheme,
-  dark: darkTheme,
 };
