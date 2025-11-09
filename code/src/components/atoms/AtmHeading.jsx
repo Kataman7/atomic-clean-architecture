@@ -24,6 +24,7 @@ const StyledH4 = styled.h4`
   font-weight: bolder;
   font-size: ${props => props.theme.fontSize.large};
   font-family: ${props => props.theme.fontFamily};
+  margin-bottom: 6px;
 `;
 
 const StyledH5 = styled.h5`

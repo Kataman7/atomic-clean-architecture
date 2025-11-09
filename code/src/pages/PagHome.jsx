@@ -8,7 +8,6 @@ import AtmButtonLink from '../components/atoms/AtmButtonLink';
 import MolNavBar from '../components/molecules/MolNavBar';
 import MolTwoColumn from '../components/molecules/MolTwoColumn';
 import MolSkills from '../components/molecules/MolSkills';
-import AtmTable from '../components/atoms/AtmTable';
 import MolContactForm from '../components/molecules/MolContactForm';
 import AtmQuote from '../components/atoms/AtmQuote';
 import MolProjectsList from '../components/molecules/MolProjectsList';
@@ -54,6 +53,9 @@ const PagHome = () => {
               </AtmButtonLink>
               <AtmButtonLink href="mailto:antonin.chabaud-pech@etu.umontpellier.fr">
                 {t('links.email')}
+              </AtmButtonLink>
+              <AtmButtonLink to="/skills">
+                {t('links.skills')}
               </AtmButtonLink>
             </MolNavBar>
           }
@@ -144,121 +146,6 @@ const PagHome = () => {
                 </AtmSimpleLink>
               </AtmHeading>
               <AtmText>{t('experience.c4w.content')}</AtmText>
-            </>
-          }
-        />
-      </MolSection>
-
-      {/* Learning Section */}
-      <MolSection>
-        <MolTwoColumn
-          leftWidth="20%"
-          left={<AtmHeading level={3}>{t('learning.title')}</AtmHeading>}
-          right={
-            <>
-              <AtmHeading level={4}>{t('learning.overview.title')}</AtmHeading>
-              <AtmText>{t('learning.overview.content1')}</AtmText>
-              <AtmText>{t('learning.overview.content2')}</AtmText>
-            </>
-          }
-        />
-      </MolSection>
-
-      {/* Develop Skills */}
-      <MolSection>
-        <MolTwoColumn
-          leftWidth="20%"
-          left={<AtmHeading level={3}>{t('develop.title')}</AtmHeading>}
-          right={
-            <>
-              <AtmHeading level={4}>{t('develop.subtitle')}</AtmHeading>
-              <AtmTable>
-                <AtmTable.Body>
-                  <tr>
-                    <AtmTable.Td><strong>CL1</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('develop.cl1')}</AtmTable.Td>
-                  </tr>
-                  <tr>
-                    <AtmTable.Td><strong>CL2</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('develop.cl2')}</AtmTable.Td>
-                  </tr>
-                  <tr>
-                    <AtmTable.Td><strong>CL3</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('develop.cl3')}</AtmTable.Td>
-                  </tr>
-                  <tr>
-                    <AtmTable.Td><strong>CL4</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('develop.cl4')}</AtmTable.Td>
-                  </tr>
-                </AtmTable.Body>
-              </AtmTable>
-            </>
-          }
-        />
-      </MolSection>
-
-      {/* Optimize Skills */}
-      <MolSection>
-        <MolTwoColumn
-          leftWidth="20%"
-          left={<AtmHeading level={3}>{t('optimize.title')}</AtmHeading>}
-          right={
-            <>
-              <AtmHeading level={4}>{t('optimize.subtitle')}</AtmHeading>
-              <AtmTable>
-                <AtmTable.Body>
-                  <tr>
-                    <AtmTable.Td><strong>CL1</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('optimize.cl1')}</AtmTable.Td>
-                  </tr>
-                  <tr>
-                    <AtmTable.Td><strong>CL2</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('optimize.cl2')}</AtmTable.Td>
-                  </tr>
-                  <tr>
-                    <AtmTable.Td><strong>CL3</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('optimize.cl3')}</AtmTable.Td>
-                  </tr>
-                  <tr>
-                    <AtmTable.Td><strong>CL4</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('optimize.cl4')}</AtmTable.Td>
-                  </tr>
-                </AtmTable.Body>
-              </AtmTable>
-            </>
-          }
-        />
-      </MolSection>
-
-      {/* Verify Skills */}
-      <MolSection>
-        <MolTwoColumn
-          leftWidth="20%"
-          left={<AtmHeading level={3}>{t('verify.title')}</AtmHeading>}
-          right={
-            <>
-              <AtmHeading level={4}>{t('verify.subtitle')}</AtmHeading>
-              <AtmTable>
-                <AtmTable.Body>
-                  <tr>
-                    <AtmTable.Td><strong>CL1</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('verify.cl1')}</AtmTable.Td>
-                  </tr>
-                  <tr>
-                    <AtmTable.Td><strong>CL2</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('verify.cl2')}</AtmTable.Td>
-                  </tr>
-                  <tr>
-                    <AtmTable.Td><strong>CL3</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('verify.cl3')}</AtmTable.Td>
-                  </tr>
-                  <tr>
-                    <AtmTable.Td><strong>CL4</strong></AtmTable.Td>
-                    <AtmTable.Td>{t('verify.cl4')}</AtmTable.Td>
-                  </tr>
-                </AtmTable.Body>
-              </AtmTable>
-              <AtmText>{t('verify.conclusion')}</AtmText>
             </>
           }
         />

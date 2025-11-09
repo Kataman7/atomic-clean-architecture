@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const StyledLink = styled.a`
+const buttonStyles = css`
   padding: ${props => props.theme.spacing.small};
   background-color: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.primary};
@@ -30,9 +31,27 @@ const StyledLink = styled.a`
   }
 `;
 
-const AtmButtonLink = ({ children, ...props }) => {
+const StyledLink = styled.a`
+  ${buttonStyles}
+`;
+
+const StyledRouterLink = styled(Link)`
+  ${buttonStyles}
+`;
+
+const AtmButtonLink = ({ children, to, href, ...props }) => {
+  // If 'to' is provided, use React Router Link (internal navigation)
+  if (to) {
+    return (
+      <StyledRouterLink to={to} {...props}>
+        {children}
+      </StyledRouterLink>
+    );
+  }
+  
+  // Otherwise use regular <a> tag (external links)
   return (
-    <StyledLink {...props}>
+    <StyledLink href={href} {...props}>
       {children}
     </StyledLink>
   );

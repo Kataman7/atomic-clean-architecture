@@ -16,9 +16,24 @@ export const LanguageProvider = ({ children }) => {
 
   const t = (key) => {
     const translation = getNestedValue(translations, key);
-    if (translation && typeof translation === 'object' && translation[currentLanguage]) {
-      return translation[currentLanguage];
+    
+    // Si la traduction n'existe pas, retourner la clé
+    if (!translation) {
+      return key;
     }
+    
+    // Si c'est un objet avec des tableaux par langue (comme skills)
+    if (translation && typeof translation === 'object' && !Array.isArray(translation)) {
+      // Si c'est un tableau dans la langue actuelle
+      if (Array.isArray(translation[currentLanguage])) {
+        return translation[currentLanguage];
+      }
+      // Si c'est une string dans la langue actuelle
+      if (typeof translation[currentLanguage] === 'string') {
+        return translation[currentLanguage];
+      }
+    }
+    
     return key; // Fallback to key if translation not found
   };
 

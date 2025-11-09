@@ -1,0 +1,264 @@
+import React from 'react';
+import { useParams, Navigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { useTranslation } from '../i18n/LanguageContext';
+import MolSection from '../components/molecules/MolSection';
+import MolTwoColumn from '../components/molecules/MolTwoColumn';
+import AtmHeading from '../components/atoms/AtmHeading';
+import AtmText from '../components/atoms/AtmText';
+import AtmButtonLink from '../components/atoms/AtmButtonLink';
+import AtmSimpleLink from '../components/atoms/AtmSimpleLink';
+import { projectsData } from '../data/projectsData';
+
+const Main = styled.main`
+  margin: auto;
+`;
+
+const DateRange = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+const MediaContainer = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  
+  img {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border: 2px solid ${props => props.theme.colors.primary};
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+  
+  video {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border: 2px solid ${props => props.theme.colors.primary};
+  }
+  
+  iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+    border: 2px solid ${props => props.theme.colors.primary};
+  }
+`;
+
+const SkillsList = styled.ul`
+  list-style-type: square;
+  padding-left: 20px;
+  
+  li {
+    margin-bottom: 10px;
+    font-size: ${props => props.theme.fontSize.small};
+    line-height: 19px;
+    font-family: ${props => props.theme.fontFamily};
+  }
+`;
+
+const PagProjectDetail = () => {
+  const { projectId } = useParams();
+  const { t, currentLanguage } = useTranslation();
+  
+  const project = projectsData[projectId];
+  
+  if (!project) {
+    return <Navigate to="/" replace />;
+  }
+  
+  // Convert project id to the correct translation key
+  const projectKeyMap = {
+    'very-bad-split': 'veryBadSplit',
+    'skull': 'skull',
+    'smile-web': 'smileWeb',
+    'silent-or-boom': 'silentOrBoom',
+    'sae-3a': 'sae3a',
+    'terraria-like': 'terrariaLike',
+    'sae-train': 'saeTrain'
+  };
+  
+  const projectKey = projectKeyMap[project.id];
+  const detailsKey = `projectDetails.${projectKey}`;
+  
+  // Helper function to check if translation exists
+  const hasTranslation = (key) => {
+    const value = t(key);
+    return value !== key && value !== undefined && value !== null && value !== '';
+  };
+  
+  const renderMedia = () => {
+    if (project.mediaType === 'image') {
+      return (
+        <MediaContainer>
+          <a href={project.mediaSrc} target="_blank" rel="noopener noreferrer">
+            <img src={project.mediaSrc} alt={project.mediaAlt} />
+          </a>
+        </MediaContainer>
+      );
+    }
+    
+    if (project.mediaType === 'images') {
+      return (
+        <MediaContainer>
+          {project.mediaSrcs.map((src, index) => (
+            <div key={index} style={{ marginBottom: '20px' }}>
+              <a href={src} target="_blank" rel="noopener noreferrer">
+                <img src={src} alt={project.mediaAlts[index]} />
+              </a>
+              {project.mediaAlts[index] && (
+                <AtmText><em>{project.mediaAlts[index]}</em></AtmText>
+              )}
+            </div>
+          ))}
+        </MediaContainer>
+      );
+    }
+    
+    if (project.mediaType === 'video') {
+      return (
+        <MediaContainer>
+          <video controls>
+            <source src={project.mediaSrc} type="video/mp4" />
+            Your browser does not support video.
+          </video>
+        </MediaContainer>
+      );
+    }
+    
+    if (project.mediaType === 'youtube') {
+      return (
+        <MediaContainer>
+          <iframe 
+            src={project.mediaSrc}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </MediaContainer>
+      );
+    }
+    
+    return null;
+  };
+
+  return (
+    <Main>
+      <MolSection>
+        <MolTwoColumn
+          leftWidth="20%"
+          left={<div></div>}
+          right={
+            <AtmButtonLink href="/">
+              {t('projectDetails.backToPortfolio')}
+            </AtmButtonLink>
+          }
+        />
+      </MolSection>
+      
+      <MolSection>
+        <MolTwoColumn
+          leftWidth="20%"
+          left={
+            <DateRange>
+              <AtmHeading level={3}>{project.startDate}</AtmHeading>
+              {project.endDate && (
+                <>
+                  <span>-</span>
+                  <AtmHeading level={3}>{project.endDate}</AtmHeading>
+                </>
+              )}
+            </DateRange>
+          }
+          right={
+            <>
+              <AtmHeading level={4}>{t(`${detailsKey}.title`)}</AtmHeading>
+              <AtmText>{t(`${detailsKey}.intro`)}</AtmText>
+              
+              {hasTranslation(`${detailsKey}.context`) && (
+                <>
+                  <AtmHeading level={4}>
+                    {currentLanguage === 'en' ? 'Project Context' : 'Contexte du Projet'}
+                  </AtmHeading>
+                  <AtmText>{t(`${detailsKey}.context`)}</AtmText>
+                </>
+              )}
+              
+              {hasTranslation(`${detailsKey}.role`) && (
+                <>
+                  <AtmHeading level={4}>
+                    {currentLanguage === 'en' ? 'My Role & Responsibilities' : 'Mon Rôle & Responsabilités'}
+                  </AtmHeading>
+                  <AtmText>{t(`${detailsKey}.role`)}</AtmText>
+                </>
+              )}
+              
+              {hasTranslation(`${detailsKey}.technologies`) && (
+                <>
+                  <AtmHeading level={4}>
+                    {currentLanguage === 'en' ? 'Technologies Used' : 'Technologies Utilisées'}
+                  </AtmHeading>
+                  <AtmText>{t(`${detailsKey}.technologies`)}</AtmText>
+                </>
+              )}
+              
+              {hasTranslation(`${detailsKey}.skills`) && Array.isArray(t(`${detailsKey}.skills`)) && (
+                <>
+                  <AtmHeading level={4}>
+                    {currentLanguage === 'en' ? 'Skills Developed' : 'Compétences Développées'}
+                  </AtmHeading>
+                  <SkillsList>
+                    {t(`${detailsKey}.skills`).map((skill, index) => (
+                      <li key={index}>{skill}</li>
+                    ))}
+                  </SkillsList>
+                </>
+              )}
+              
+              {hasTranslation(`${detailsKey}.takeaways`) && (
+                <>
+                  <AtmHeading level={4}>
+                    {currentLanguage === 'en' ? 'Key Takeaways' : 'Points Clés'}
+                  </AtmHeading>
+                  <AtmText>{t(`${detailsKey}.takeaways`)}</AtmText>
+                </>
+              )}
+              
+              {hasTranslation(`${detailsKey}.linkUrl`) && (
+                <AtmText>
+                  <strong>{t(`${detailsKey}.link`)}</strong>{' '}
+                  <AtmSimpleLink href={t(`${detailsKey}.linkUrl`)} target="_blank">
+                    {t(`${detailsKey}.linkUrl`)}
+                  </AtmSimpleLink>
+                </AtmText>
+              )}
+              
+              {hasTranslation(`${detailsKey}.itchUrl`) && (
+                <AtmText>
+                  <strong>{t(`${detailsKey}.itchLink`)}</strong>{' '}
+                  <AtmSimpleLink href={t(`${detailsKey}.itchUrl`)} target="_blank">
+                    {t(`${detailsKey}.itchUrl`)}
+                  </AtmSimpleLink>
+                </AtmText>
+              )}
+              
+              {hasTranslation(`${detailsKey}.trailer`) && (
+                <AtmText><strong>{t(`${detailsKey}.trailer`)}</strong></AtmText>
+              )}
+            </>
+          }
+        />
+        {renderMedia()}
+      </MolSection>
+    </Main>
+  );
+};
+
+export default PagProjectDetail;

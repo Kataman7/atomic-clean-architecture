@@ -15,11 +15,11 @@ export const portfolioTheme = {
     section: '30px', // Espacement entre sections
   },
   fontSize: {
-    small: '12px', // 9px pour h5, small pour p
-    medium: '16px', // medium pour navBar li
-    large: '18px', // large pour h4
-    xl: '24px', // pour h2, h3
-    xxl: '32px', // pour h1
+    small: '14px', // 9px pour h5, small pour p
+    medium: '18px', // medium pour navBar li
+    large: '22px', // large pour h4
+    xl: '28px', // pour h2, h3
+    xxl: '38px', // pour h1
   },
   border: {
     normal: '2px',
@@ -51,11 +51,11 @@ export const lightTheme = {
     section: '30px', // Espacement entre sections
   },
   fontSize: {
-    small: '12px',
-    medium: '16px',
-    large: '18px',
-    xl: '24px',
-    xxl: '32px',
+    small: '14px',
+    medium: '18px',
+    large: '22px',
+    xl: '28px',
+    xxl: '38px',
   },
   border: {
     normal: '2px',
