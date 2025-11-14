@@ -4,6 +4,7 @@ import AtmHeading from '../atoms/AtmHeading';
 import AtmText from '../atoms/AtmText';
 import AtmButton from '../atoms/AtmButton';
 import { useTranslation } from '../../i18n/LanguageContext';
+import AtmSimpleLink from '../atoms/AtmSimpleLink';
 
 const ProjectDate = styled.div`
   text-align: center;
@@ -40,9 +41,11 @@ const MolProject = ({
         )}
       </ProjectDate>
       <ProjectContent>
-        <AtmHeading level={4}>{t(titleKey)}</AtmHeading>
+        <AtmHeading level={4}>
+          <AtmSimpleLink href={projectUrl}>{t(titleKey)}</AtmSimpleLink>
+        </AtmHeading>
+        coucou
         <AtmText>{t(descriptionKey)}</AtmText>
-        <AtmButton href={projectUrl}>{t('projects.viewProject')}</AtmButton>
       </ProjectContent>
     </>
   );

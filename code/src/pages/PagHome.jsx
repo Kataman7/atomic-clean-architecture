@@ -10,7 +10,7 @@ import MolTwoColumn from '../components/molecules/MolTwoColumn';
 import MolSkills from '../components/molecules/MolSkills';
 import MolContactForm from '../components/molecules/MolContactForm';
 import AtmQuote from '../components/atoms/AtmQuote';
-import MolProjectsList from '../components/molecules/MolProjectsList';
+import OrgProjectsList from '../components/organisms/OrgProjectsList';
 import MolFooterClock from '../components/molecules/MolFooterClock';
 import AtmSimpleLink from '../components/atoms/AtmSimpleLink';
 
@@ -158,7 +158,7 @@ const PagHome = () => {
           left={<AtmHeading level={3}>{t('projects.title')}</AtmHeading>}
           right={<AtmText>{t('projects.intro')}</AtmText>}
         />
-        <MolProjectsList />
+        <OrgProjectsList />
       </MolSection>
 
       {/* Hobbies Section */}

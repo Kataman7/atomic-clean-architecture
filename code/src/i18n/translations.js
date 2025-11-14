@@ -81,18 +81,24 @@ export const translations = {
         en: "2023-2026"
       }
     },
+    /*Logo de IAE Montpellier
+IAE Montpellier
+IAE Montpellier
+Licentiate degree, Management Technologies et SciencesLicentiate degree, Management Technologies et Sciences
+sept. 2025 - août 2026sept. 2025 - août 2026
+Niveau : L3*/
     bac: {
       title: {
-        fr: "Baccalauréat Général",
-        en: "General Baccalaureate"
+        fr: "IAE Montpellier",
+        en: "IAE Montpellier"
       },
       specialty: {
-        fr: "Spé Maths & Anglais",
-        en: "Maths & English Spec"
+        fr: "Licence, Technologies et Sciences de la Gestion",
+        en: "Licentiate degree, Management Technologies et Sciences"
       },
       year: {
-        fr: "2023",
-        en: "2023"
+        fr: "2025-2026",
+        en: "2025-2026"
       }
     }
   },
@@ -469,12 +475,12 @@ export const translations = {
 
   // Theme button
   lightTheme: {
-    fr: "☀️ Light",
-    en: "☀️ Light"
+    fr: "Light",
+    en: "Light"
   },
   darkTheme: {
-    fr: "🌙 Dark",
-    en: "🌙 Dark"
+    fr: "Dark",
+    en: "Dark"
   },
 
   // Project Details

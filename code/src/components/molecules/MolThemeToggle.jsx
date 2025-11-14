@@ -13,7 +13,7 @@ const ThemeButton = styled(AtmButton)`
 const LanguageButton = styled(AtmButton)`
   position: fixed;
   top: 20px;
-  right: 120px;
+  right: 90px;
   z-index: 1000;
 `;
 

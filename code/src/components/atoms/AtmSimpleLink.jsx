@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const StyledSimpleLink = styled.a`
+const linkStyles = css`
   color: ${props => props.theme.colors.primary};
   text-decoration: underline;
   font-family: ${props => props.theme.fontFamily};
@@ -16,7 +17,25 @@ const StyledSimpleLink = styled.a`
   }
 `;
 
-const AtmSimpleLink = ({ children, href, target, ...props }) => {
+const StyledSimpleLink = styled.a`
+  ${linkStyles}
+`;
+
+const StyledRouterLink = styled(Link)`
+  ${linkStyles}
+`;
+
+const AtmSimpleLink = ({ children, href, to, target, ...props }) => {
+  // If 'to' is provided, use React Router Link (internal navigation)
+  if (to) {
+    return (
+      <StyledRouterLink to={to} onClick={() => window.scrollTo(0, 0)} {...props}>
+        {children}
+      </StyledRouterLink>
+    );
+  }
+  
+  // Otherwise use regular <a> tag (external links)
   return (
     <StyledSimpleLink href={href} target={target} {...props}>
       {children}

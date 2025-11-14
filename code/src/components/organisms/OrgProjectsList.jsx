@@ -1,10 +1,11 @@
 import React from 'react';
-import MolTwoColumn from './MolTwoColumn';
+import MolTwoColumn from '../molecules/MolTwoColumn';
 import AtmHeading from '../atoms/AtmHeading';
 import AtmText from '../atoms/AtmText';
 import AtmButtonLink from '../atoms/AtmButtonLink';
 import { useTranslation } from '../../i18n/LanguageContext';
 import styled from 'styled-components';
+import AtmSimpleLink from '../atoms/AtmSimpleLink';
 
 const ProjectsContainer = styled.div`
   width: 100%;
@@ -25,7 +26,7 @@ const DateRange = styled.div`
   gap: 10px;
 `;
 
-const MolProjectsList = () => {
+const OrgProjectsList = () => {
   const { t } = useTranslation();
 
   const projects = [
@@ -100,11 +101,12 @@ const MolProjectsList = () => {
           }
           right={
             <>
-              <AtmHeading level={4}>{t(project.titleKey)}</AtmHeading>
+              <AtmHeading level={4}>
+                <AtmSimpleLink to={`/project/${project.projectId}`}>
+                  {t(project.titleKey)}
+                </AtmSimpleLink>
+              </AtmHeading>
               <AtmText>{t(project.descriptionKey)}</AtmText>
-              <AtmButtonLink to={`/project/${project.projectId}`}>
-                {t('projects.viewProject')}
-              </AtmButtonLink>
             </>
           }
         />
@@ -113,4 +115,4 @@ const MolProjectsList = () => {
   );
 };
 
-export default MolProjectsList;
+export default OrgProjectsList;
