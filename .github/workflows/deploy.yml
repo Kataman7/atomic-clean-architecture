@@ -23,4 +23,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          cname: # optional: ajoute ton domaine custom ici si tu en as un
+          cname: # optional: ajoute ton domaine custom ici si tu en as un test
