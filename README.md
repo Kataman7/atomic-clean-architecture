@@ -9,7 +9,7 @@ Une démo d'architecture frontend propre utilisant React, Three.js et une struct
 - **État Global** : Gestion d'état avec Redux Toolkit.
 - **API REST** : Système flexible pour communiquer avec des APIs externes (configurable via `.env`).
 - **i18n** : Translations stored per key with language sub-objects (ex: `app.title = { fr: 'Mon Application', en: 'My Application' }`).
-- **Docker** : Modes dev et build pour faciliter le développement et le déploiement.
+-- **Docker** : Conteneurisation simple pour développement et build statique.
 - **Styled Components** : Styles encapsulés via `styled-components` et thème centralisé.
 
 ## Technologies
@@ -62,19 +62,35 @@ code/
    ```bash
    docker-compose up --build
    ```
-   - Mode dev : `http://localhost:5173`
-   - Mode build : `http://localhost:80`
+  - Mode dev : `http://localhost:5173`
 
 > Docker est obligatoire pour lancer le projet : les commandes ci-dessous se contentent de lister les options Docker (le projet n'est pas prévu pour un run local hors Docker dans la doc actuelle).
 
-## Utilisation
 
 ### Commandes Docker
-- `docker-compose up` : Lance dev et build
-- `docker-compose up dev` : Mode dev seulement
-- `docker-compose up build` : Mode build seulement
-- `docker-compose build` : Construit les images
-- `docker-compose down` : Arrête tout
+
+- `docker-compose up` : Lance le service `app`
+- `docker compose exec app npm run build:host` : Build et peuple `./build` sur l'hôte
+- (optionnel) `npx http-server build -p 5500` : Preview local sans Docker
+
+ 
+
+### Si tu ouvres `build/index.html` avec Live Preview et tu as des erreurs
+
+Tu peux voir des erreurs comme :
+
+- Refused to apply style ... because its MIME type ('text/html') is not a supported stylesheet MIME type
+- Failed to load resource: the server responded with a status of 404 (Not Found)
+
+Causa commune — l'HTML de `index.html` référence `/assets/xxx` (chemin absolu) mais ton serveur de preview ne sert pas `build` comme racine, donc les requêtes vers `/assets/...` retournent `index.html` (HTML) au lieu des fichiers statiques.
+
+Solutions rapides :
+
+
+
+### Commandes Docker
+- `docker-compose up` : Lance le service `app`
+- `docker exec -it app npm run build:host` : Build et peuple `./build` sur l'hôte
 
 ### Configuration API
 Modifie `code/.env` pour définir l'URL de l'API :
@@ -256,9 +272,18 @@ Système générique pour les appels REST, avec gestion d'erreurs et sérialisat
 ## Déploiement
 
 Pour déployer en production :
-1. Construit l'image : `docker-compose build build`
+1. Construit l'image de production directement depuis `code/Dockerfile` :
+  ```powershell
+  docker build -t atomic-clean-architecture:latest -f code/Dockerfile code
+  ```
 2. Pousse vers un registry ou déploie le conteneur
 3. Les fichiers statiques sont servis par Nginx
+
+⚠️ Note sur le montage `./build` :
+
+Dans cette version simplifiée, il n'y a plus de service `build` qui monte `./build` dans Nginx. Pour déployer en production, nous recommandons d'utiliser `code/Dockerfile` qui copie les fichiers buildés (`/app/dist`) dans l'image Nginx — ainsi pas besoin de mounts host pour la production.
+
+Si tu utilises encore `./build` pour prévisualiser localement, rappelle-toi qu'un montage `./build:/usr/share/nginx/html` (dans une compose configurée pour Nginx) masquera les fichiers à l'intérieur de l'image si le dossier hôte est vide. Dans ce cas, remplis `./build` avant de lancer Nginx.
 
 ## Contribution
 
