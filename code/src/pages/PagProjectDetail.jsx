@@ -28,7 +28,6 @@ const MediaContainer = styled.div`
     width: 100%;
     max-width: 800px;
     height: auto;
-    border: 2px solid ${props => props.theme.colors.primary};
     cursor: pointer;
     transition: transform 0.3s ease;
     
@@ -154,16 +153,19 @@ const PagProjectDetail = () => {
       <MolSection>
         <MolTwoColumn
           leftWidth="20%"
-          left={<div></div>}
+          left={<AtmHeading level={3}>{t('links.title')}</AtmHeading>}
           right={
-            <AtmButtonLink href="/">
-              {t('projectDetails.backToPortfolio')}
-            </AtmButtonLink>
+            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+              <AtmButtonLink href="/">
+                {t('projectDetails.backToPortfolio')}
+              </AtmButtonLink>
+            </div>
           }
         />
       </MolSection>
       
       <MolSection>
+        {/* Date (left) + Title & Intro (right) */}
         <MolTwoColumn
           leftWidth="20%"
           left={
@@ -181,80 +183,94 @@ const PagProjectDetail = () => {
             <>
               <AtmHeading level={4}>{t(`${detailsKey}.title`)}</AtmHeading>
               <AtmText>{t(`${detailsKey}.intro`)}</AtmText>
-              
-              {hasTranslation(`${detailsKey}.context`) && (
-                <>
-                  <AtmHeading level={4}>
-                    {currentLanguage === 'en' ? 'Project Context' : 'Contexte du Projet'}
-                  </AtmHeading>
-                  <AtmText>{t(`${detailsKey}.context`)}</AtmText>
-                </>
-              )}
-              
-              {hasTranslation(`${detailsKey}.role`) && (
-                <>
-                  <AtmHeading level={4}>
-                    {currentLanguage === 'en' ? 'My Role & Responsibilities' : 'Mon Rôle & Responsabilités'}
-                  </AtmHeading>
-                  <AtmText>{t(`${detailsKey}.role`)}</AtmText>
-                </>
-              )}
-              
-              {hasTranslation(`${detailsKey}.technologies`) && (
-                <>
-                  <AtmHeading level={4}>
-                    {currentLanguage === 'en' ? 'Technologies Used' : 'Technologies Utilisées'}
-                  </AtmHeading>
-                  <AtmText>{t(`${detailsKey}.technologies`)}</AtmText>
-                </>
-              )}
-              
-              {hasTranslation(`${detailsKey}.skills`) && Array.isArray(t(`${detailsKey}.skills`)) && (
-                <>
-                  <AtmHeading level={4}>
-                    {currentLanguage === 'en' ? 'Skills Developed' : 'Compétences Développées'}
-                  </AtmHeading>
-                  <SkillsList>
-                    {t(`${detailsKey}.skills`).map((skill, index) => (
-                      <li key={index}>{skill}</li>
-                    ))}
-                  </SkillsList>
-                </>
-              )}
-              
-              {hasTranslation(`${detailsKey}.takeaways`) && (
-                <>
-                  <AtmHeading level={4}>
-                    {currentLanguage === 'en' ? 'Key Takeaways' : 'Points Clés'}
-                  </AtmHeading>
-                  <AtmText>{t(`${detailsKey}.takeaways`)}</AtmText>
-                </>
-              )}
-              
-              {hasTranslation(`${detailsKey}.linkUrl`) && (
-                <AtmText>
-                  <strong>{t(`${detailsKey}.link`)}</strong>{' '}
-                  <AtmSimpleLink href={t(`${detailsKey}.linkUrl`)} target="_blank">
-                    {t(`${detailsKey}.linkUrl`)}
-                  </AtmSimpleLink>
-                </AtmText>
-              )}
-              
-              {hasTranslation(`${detailsKey}.itchUrl`) && (
-                <AtmText>
-                  <strong>{t(`${detailsKey}.itchLink`)}</strong>{' '}
-                  <AtmSimpleLink href={t(`${detailsKey}.itchUrl`)} target="_blank">
-                    {t(`${detailsKey}.itchUrl`)}
-                  </AtmSimpleLink>
-                </AtmText>
-              )}
-              
-              {hasTranslation(`${detailsKey}.trailer`) && (
-                <AtmText><strong>{t(`${detailsKey}.trailer`)}</strong></AtmText>
-              )}
             </>
           }
         />
+
+        {/* Context */}
+        {hasTranslation(`${detailsKey}.context`) && (
+          <MolTwoColumn
+            leftWidth="20%"
+            left={<AtmHeading level={3}>{currentLanguage === 'en' ? 'Project Context' : 'Contexte du Projet'}</AtmHeading>}
+            right={<AtmText>{t(`${detailsKey}.context`)}</AtmText>}
+          />
+        )}
+
+        {/* Role */}
+        {hasTranslation(`${detailsKey}.role`) && (
+          <MolTwoColumn
+            leftWidth="20%"
+            left={<AtmHeading level={3}>{currentLanguage === 'en' ? 'My Role & Responsibilities' : 'Mon Rôle & Responsabilités'}</AtmHeading>}
+            right={<AtmText>{t(`${detailsKey}.role`)}</AtmText>}
+          />
+        )}
+
+        {/* Technologies */}
+        {hasTranslation(`${detailsKey}.technologies`) && (
+          <MolTwoColumn
+            leftWidth="20%"
+            left={<AtmHeading level={3}>{currentLanguage === 'en' ? 'Technologies Used' : 'Technologies Utilisées'}</AtmHeading>}
+            right={<AtmText>{t(`${detailsKey}.technologies`)}</AtmText>}
+          />
+        )}
+
+        {/* Skills */}
+        {hasTranslation(`${detailsKey}.skills`) && Array.isArray(t(`${detailsKey}.skills`)) && (
+          <MolTwoColumn
+            leftWidth="20%"
+            left={<AtmHeading level={3}>{currentLanguage === 'en' ? 'Skills Developed' : 'Compétences Développées'}</AtmHeading>}
+            right={
+              <SkillsList>
+                {t(`${detailsKey}.skills`).map((skill, index) => (
+                  <li key={index}>{skill}</li>
+                ))}
+              </SkillsList>
+            }
+          />
+        )}
+
+        {/* Takeaways */}
+        {hasTranslation(`${detailsKey}.takeaways`) && (
+          <MolTwoColumn
+            leftWidth="20%"
+            left={<AtmHeading level={3}>{currentLanguage === 'en' ? 'Key Takeaways' : 'Points Clés'}</AtmHeading>}
+            right={<AtmText>{t(`${detailsKey}.takeaways`)}</AtmText>}
+          />
+        )}
+
+        {/* Links (linkUrl + itchUrl) */}
+        {(hasTranslation(`${detailsKey}.linkUrl`) || hasTranslation(`${detailsKey}.itchUrl`)) && (
+          <MolTwoColumn
+            leftWidth="20%"
+            left={<AtmHeading level={3}>{currentLanguage === 'en' ? 'Links' : 'Liens'}</AtmHeading>}
+            right={
+              <>
+                {hasTranslation(`${detailsKey}.linkUrl`) && (
+                  <AtmText>
+                    <strong>{t(`${detailsKey}.link`)}</strong>{' '}
+                    <AtmSimpleLink href={t(`${detailsKey}.linkUrl`)} target="_blank">{t(`${detailsKey}.linkUrl`)}</AtmSimpleLink>
+                  </AtmText>
+                )}
+                {hasTranslation(`${detailsKey}.itchUrl`) && (
+                  <AtmText>
+                    <strong>{t(`${detailsKey}.itchLink`)}</strong>{' '}
+                    <AtmSimpleLink href={t(`${detailsKey}.itchUrl`)} target="_blank">{t(`${detailsKey}.itchUrl`)}</AtmSimpleLink>
+                  </AtmText>
+                )}
+              </>
+            }
+          />
+        )}
+
+        {/* Trailer */}
+        {hasTranslation(`${detailsKey}.trailer`) && (
+          <MolTwoColumn
+            leftWidth="20%"
+            left={<AtmHeading level={3}>{currentLanguage === 'en' ? 'Trailer' : 'Bande-annonce'}</AtmHeading>}
+            right={<AtmText><strong>{t(`${detailsKey}.trailer`)}</strong></AtmText>}
+          />
+        )}
+
         {renderMedia()}
       </MolSection>
     </Main>

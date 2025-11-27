@@ -6,6 +6,7 @@ import AtmHeading from '../components/atoms/AtmHeading';
 import AtmText from '../components/atoms/AtmText';
 import MolTwoColumn from '../components/molecules/MolTwoColumn';
 import AtmTable from '../components/atoms/AtmTable';
+import AtmButtonLink from '../components/atoms/AtmButtonLink';
 
 const Main = styled.main`
   margin: auto;
@@ -16,6 +17,21 @@ const PagSkills = () => {
 
   return (
     <Main>
+
+      <MolSection>
+        <MolTwoColumn
+          leftWidth="20%"
+          left={<AtmHeading level={3}>{t('links.title')}</AtmHeading>}
+          right={
+            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+              <AtmButtonLink href="/">
+                {t('projectDetails.backToPortfolio')}
+              </AtmButtonLink>
+            </div>
+          }
+        />
+      </MolSection>
+
       {/* Learning Section */}
       <MolSection>
         <MolTwoColumn

@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
 import styled from 'styled-components'
-import { themes } from '../styles/theme'
+import ThemeProviderWrapper from '../styles/ThemeProvider'
 import { GlobalStyles } from '../styles/globalStyles'
 import MolThemeToggle from '../components/molecules/MolThemeToggle'
 import { LanguageProvider } from '../i18n/LanguageContext'
@@ -32,24 +31,20 @@ const AppContainer = styled.div`
 `;
 
 const App = () => {
-  const [currentTheme, setCurrentTheme] = useState('portfolio');
-
-  const handleThemeChange = (themeName) => {
-    setCurrentTheme(themeName);
-  };
+  // Theme management moved to ThemeProviderWrapper
 
   return (
     <LanguageProvider>
-      <ThemeProvider theme={themes[currentTheme]}>
+      <ThemeProviderWrapper>
         <GlobalStyles />
         <BrowserRouter>
           <AppContainer>
-            <MolThemeToggle onThemeChange={handleThemeChange} />
+            <MolThemeToggle />
             <OrgHeader titleKey="name" />
             <AppRoutes />
           </AppContainer>
         </BrowserRouter>
-      </ThemeProvider>
+      </ThemeProviderWrapper>
     </LanguageProvider>
   )
 }

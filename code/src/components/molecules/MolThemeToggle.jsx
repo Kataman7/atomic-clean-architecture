@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import React from 'react';
 import AtmButton from '../atoms/AtmButton';
 import { useTranslation } from '../../i18n/LanguageContext';
+import { useTheme } from '../../styles/ThemeProvider';
 import styled from 'styled-components';
 
 const ThemeButton = styled(AtmButton)`
@@ -17,14 +18,12 @@ const LanguageButton = styled(AtmButton)`
   z-index: 1000;
 `;
 
-const MolThemeToggle = ({ onThemeChange }) => {
-  const [isDark, setIsDark] = useState(true);
+const MolThemeToggle = () => {
   const { t, toggleLanguage, currentLanguage } = useTranslation();
+  const { isDark, toggleTheme } = useTheme();
 
   const handleThemeToggle = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    onThemeChange(newTheme ? 'portfolio' : 'light');
+    toggleTheme();
   };
 
   return (
